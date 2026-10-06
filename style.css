@@ -64,3 +64,32 @@ dialog{max-height:calc(100dvh - 32px);overflow-y:auto;overscroll-behavior:contai
 .child-menu{display:none}
 @media(max-width:600px){.cards{grid-template-columns:1fr;gap:12px}.card{padding:14px;overflow:visible}.child-top{flex:none;flex-direction:row;text-align:left;justify-content:flex-start;min-height:0;margin-bottom:0;gap:12px}.child-top>.avatar{width:48px;height:48px;flex:0 0 48px;border-width:3px;font-size:19px}.child-top>div{flex:1}.child-top h3{font-size:16px;margin:0 0 3px;text-align:left}.child-top .namebutton{text-align:left}.child-top p{font-size:12px;margin:0;text-align:left}.child-menu{display:block;position:relative;flex:0 0 36px;align-self:flex-start}.child-menu summary{list-style:none;cursor:pointer;width:36px;min-height:44px;display:grid;place-items:center;font-size:25px;color:#56799f;border-radius:8px}.child-menu summary::-webkit-details-marker{display:none}.child-menu[open]{z-index:2}.child-menu button{position:absolute;right:0;top:42px;padding:12px 16px;min-height:44px;background:white;color:#174572;border:1px solid #d2e3f7;border-radius:10px;box-shadow:0 5px 18px #17457220;white-space:nowrap}.attendance-result{justify-content:flex-start;min-height:44px;padding:10px 12px;font-size:15px;border-radius:11px;margin-top:12px;flex-wrap:nowrap}.attendance-result strong{flex:1;min-width:0;overflow-wrap:anywhere}.attendance-result .arrival-time{font-size:12px;flex-direction:row;width:auto;margin:0;white-space:nowrap}.attendance-result>.ui-icon{width:18px;height:18px;flex-shrink:0}.card-bottom{justify-content:space-between;margin-top:8px;padding-top:5px;gap:8px}.card-bottom [data-edit]{display:none}.card-bottom .textbutton{min-height:36px;min-width:55px;padding:8px 0;font-size:12px}.pending-status{text-align:left;margin:12px 0 9px;font-size:12px}.actions{gap:8px}.actions button{min-height:44px;font-size:14px;padding:11px 6px}.actions .all-day{min-height:44px;font-size:14px}}
 @media(max-width:600px){.attendance-result .arrival-time{flex:0 0 auto;justify-content:flex-end}.attendance-result strong{overflow-wrap:normal}}
+
+/* v11: retain v10 mobile layout; card colour depends only on position. */
+@media(max-width:600px){
+  .cards>.card:nth-child(odd){background:#e1f7ec;border-color:#cfeee0}
+  .cards>.card:nth-child(even){background:#ffe0e8;border-color:#fad1df}
+  .stats-heading,.stats-heading>div,.stats-filters,.stats-child,.stats-tags{min-width:0;max-width:100%}
+  .stats-who small{overflow-wrap:anywhere}
+  .stats-tag{max-width:100%;white-space:normal;overflow-wrap:anywhere}
+}
+/* Galaxy A54 and narrow phones: let content wrap instead of clipping it. */
+@media(max-width:412px){
+  main{min-width:0}
+  .summary .metric,.summary .metric>div{min-width:0}
+  .summary .metric{padding:12px 10px;gap:6px}
+  .summary .metric small{overflow-wrap:anywhere;line-height:1.35}
+  .summary .metric b{font-size:clamp(20px,6vw,24px);overflow-wrap:anywhere}
+  .stats-panel{padding:14px}
+  .stats-filters{display:grid;grid-template-columns:minmax(0,1fr);gap:8px}
+  .stats-filters select{width:100%;min-width:0}
+  .stats-child{display:grid;grid-template-columns:48px minmax(0,1fr) 52px;gap:10px}
+  .stats-child .avatar{width:48px;height:48px;font-size:18px}
+  .stats-who{width:auto;min-width:0}
+  .stats-who button{max-width:100%}
+  .stats-ring{grid-column:3;grid-row:1;width:52px;height:52px;padding:5px;margin:0}
+  .stats-ring span{font-size:13px}
+  .stats-tags{grid-column:1/-1;display:flex;flex-wrap:wrap;gap:7px}
+  .stats-tag{padding:8px;font-size:12px}
+  .stats-tag b{font-size:16px}
+}
