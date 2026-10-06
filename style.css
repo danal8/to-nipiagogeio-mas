@@ -50,3 +50,11 @@ button:disabled{cursor:wait;opacity:.6}
 @media(max-width:600px){.cards{grid-template-columns:repeat(auto-fill,minmax(min(100%,210px),1fr))}.card{padding:20px 16px}.child-top{min-height:145px}.child-top h3{font-size:17px}.actions button{font-size:15px;padding:12px 6px}.actions .ui-icon{width:18px;height:18px}.formactions{flex-wrap:wrap}.photoedit{flex-wrap:wrap}}
 .auth-switch{display:block;width:100%;background:transparent;color:#1767c6;font-weight:600;margin-top:16px;padding:10px 0;line-height:1.5}
 .danger-text{color:#bf3654;font-weight:600}.settings td{overflow-wrap:anywhere}.settings td button{white-space:normal}
+.summary{grid-template-columns:repeat(auto-fit,minmax(155px,1fr))}
+.metric.lilac{background:#f0eaff;border-color:#dfd0f5}.metric.lilac .icon{background:#e5d8ff;color:#7754a8}
+.actions{flex-wrap:wrap}.actions .all-day{flex-basis:100%;background:#eee6fb;border:1px solid #d9c7f1;color:#715298;min-height:44px;font-size:14px}
+.attendance-result.all_day_absent,.badge.all_day_absent{background:#eee6fb;color:#715298;border:1px solid #d9c7f1}
+.teacher-rows{display:grid;gap:12px}.teacher-row{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:14px;padding:16px;background:#f7fbff;border:1px solid #dfeafa;border-radius:14px}
+.teacher-details{display:grid;gap:6px;min-width:0}.teacher-details strong{overflow-wrap:anywhere;font-size:14px}.teacher-actions{display:flex;flex-wrap:wrap;gap:8px}.teacher-actions button{min-height:44px}
+dialog{max-height:calc(100dvh - 32px);overflow-y:auto;overscroll-behavior:contain}dialog p,dialog strong{overflow-wrap:anywhere}
+@media(max-width:600px){.teacher-row{grid-template-columns:1fr}.teacher-actions button{flex:1}.summary{grid-template-columns:repeat(2,minmax(0,1fr))}.metric:last-child:nth-child(odd){grid-column:1/-1}.actions .all-day{font-size:14px}.formactions button{min-height:44px}}
