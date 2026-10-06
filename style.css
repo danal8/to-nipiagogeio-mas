@@ -20,3 +20,33 @@ main{margin-left:245px;width:calc(100% - 245px);padding:30px 34px}header{margin-
 .install-app{position:fixed;right:20px;bottom:18px;background:#1769d8;color:white;border:1px solid #fff8;border-radius:25px;padding:11px 17px;box-shadow:0 4px 20px #16427930;z-index:8;font-size:14px;font-weight:600}
 [hidden]{display:none!important}#network-notice{padding:13px 17px;background:#fff0c4;color:#705717;border-radius:10px;margin-bottom:16px;font-size:14px}.login-page .install-app{bottom:18px}main footer{padding-bottom:35px}
 @media(max-width:700px){.date-highlight{gap:9px;padding:11px 12px}.date-highlight strong{font-size:21px}.date-highlight .ui-icon{width:24px;height:24px}.install-app{bottom:84px;right:12px;font-size:12px;padding:9px 12px}.login-page .install-app{bottom:12px}.login-page main{padding-bottom:60px}}
+[data-view],.card,.child-top,.child-top>div{min-width:0}
+.cards{grid-template-columns:repeat(auto-fill,minmax(min(100%,220px),1fr));align-items:stretch}
+.card{display:flex;flex-direction:column;padding:20px 16px;overflow:hidden}
+.child-top{flex:1;min-height:145px;gap:12px}
+.child-top h3{line-height:1.35;width:100%;margin:4px 0 6px}
+.child-top .namebutton,.child-top p{max-width:100%;white-space:normal;overflow-wrap:anywhere;word-break:normal}
+.card .namebutton{font-size:inherit;line-height:inherit}
+.card-bottom{display:flex;flex-wrap:wrap;justify-content:center;gap:5px 10px;margin-top:14px;padding-top:12px;border-top:1px solid #d8e6ef}
+.card-bottom .textbutton{padding:5px 2px;font-size:13px;line-height:1.25;min-height:32px;max-width:100%}
+.actions{gap:8px;margin-top:8px}
+.actions button{min-width:0;padding:12px 5px;white-space:normal}
+.pending-status{text-align:center;color:#74839a;font-size:13px;margin:10px 0 6px}
+.attendance-result{display:flex;align-items:center;justify-content:center;gap:8px;flex-wrap:wrap;min-height:52px;padding:13px 10px;border-radius:14px;margin-top:10px;font-size:17px}
+.attendance-result.present{background:#d4f4df;color:#168145;border:1px solid #a0e4b7}
+.attendance-result.absent{background:#ffe0e5;color:#c73553;border:1px solid #ffb7c4}
+.arrival-time{display:flex;align-items:center;gap:4px;font-size:13px;flex-basis:100%;justify-content:center;font-weight:400}
+.arrival-time .ui-icon{width:15px;height:15px}
+.photoedit>div{min-width:0}.photoedit input[type=file]{max-width:100%}
+.photo-tools{display:flex;flex-wrap:wrap;gap:8px;margin-top:6px}
+.cropeditor{background:#eef7ff;border:1px solid #d4e5f4;border-radius:16px;padding:16px;margin:16px 0;text-align:center}
+.cropeditor h3{margin:0 0 8px}.cropeditor label{text-align:left;margin-top:15px}
+#cropcanvas{display:block;width:min(100%,260px);height:auto;aspect-ratio:1;margin:auto;border-radius:50%;border:4px solid white;box-shadow:0 0 0 2px #9dc2df;touch-action:none;cursor:grab}
+#cropcanvas:active{cursor:grabbing}#cropzoom{padding:0;accent-color:#2376bf;min-height:32px}
+.delete-area{border-top:1px solid #e4eaf2;padding-top:18px;margin-top:22px}
+.danger,.danger-outline{border-radius:12px;padding:12px 16px;font-weight:650}
+.danger{color:white;background:#d9395c}.danger-outline{background:#fff2f5;color:#b92949;border:1px solid #f2bdca}
+button:disabled{cursor:wait;opacity:.6}
+@media(max-width:600px){.cards{grid-template-columns:repeat(auto-fill,minmax(min(100%,210px),1fr))}.card{padding:20px 16px}.child-top{min-height:145px}.child-top h3{font-size:17px}.actions button{font-size:15px;padding:12px 6px}.actions .ui-icon{width:18px;height:18px}.formactions{flex-wrap:wrap}.photoedit{flex-wrap:wrap}}
+.auth-switch{display:block;width:100%;background:transparent;color:#1767c6;font-weight:600;margin-top:16px;padding:10px 0;line-height:1.5}
+.danger-text{color:#bf3654;font-weight:600}.settings td{overflow-wrap:anywhere}.settings td button{white-space:normal}
