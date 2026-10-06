@@ -36,7 +36,7 @@ function login(mode='login',message=''){
     const {data,error}=await db.auth.signInWithPassword({email,password});if(error)throw error;
     user=data.user;try{await load();render()}catch(err){user=null;schoolId=null;isAdmin=false;await db.auth.signOut();throw err}
    }
-  }catch(err){const errors={'Invalid login credentials':'Το email ή ο κωδικός δεν είναι σωστός.','Email not confirmed':'Επιβεβαιώστε πρώτα το email σας από το μήνυμα εγγραφής.','User already registered':'Υπάρχει ήδη λογαριασμός με αυτό το email. Επιλέξτε Είσοδος.','Signups not allowed for this instance':'Η εγγραφή δεν είναι διαθέσιμη αυτή τη στιγμή.','email rate limit exceeded':'Η αποστολή email έφτασε το όριο. Δοκιμάστε αργότερα.'};$('#loginerror').textContent=errors[err.message]||err.message}
+  }catch(err){const errors={'Invalid login credentials':'Το email ή ο κωδικός δεν είναι σωστός.','Email not confirmed':'Επιβεβαιώστε πρώτα το email σας από το μήνυμα εγγραφής.','User already registered':'Υπάρχει ήδη λογαριασμός με αυτό το email. Επιλέξτε Είσοδος.','Signups not allowed for this instance':'Η εγγραφή δεν είναι διαθέσιμη αυτή τη στιγμή.','Email address not authorized':'Η εγγραφή δεν ολοκληρώθηκε. Η αποστολή email δεν έχει ακόμη ρυθμιστεί από τον διαχειριστή.','email rate limit exceeded':'Η αποστολή email έφτασε το όριο. Δοκιμάστε αργότερα.'};$('#loginerror').textContent=(err.code==='email_address_not_authorized'?'Η εγγραφή δεν ολοκληρώθηκε. Η αποστολή email δεν έχει ακόμη ρυθμιστεί από τον διαχειριστή.':errors[err.message]||err.message)}
   finally{b.disabled=false}
  };
 }
@@ -73,14 +73,14 @@ function editChild(id){
  <p class="error" id="formerror" role="alert"></p><div class="formactions"><button type="button" class="secondary" data-close>Ακύρωση</button><button id="savechild" class="primary">Αποθήκευση</button></div>
  ${id?'<div class="delete-area"><button type="button" id="deletechild" class="danger-outline">Διαγραφή παιδιού</button></div>':''}</form>`;
  openModal();
- const canvas=$('#cropcanvas'),ctx=canvas.getContext('2d'),editor=$('#cropeditor');
+ const canvas=$('#cropcanvas'),ctx=canvas.getContext('2d'),editor=$('#cropeditor'),saveButton=$('#savechild');
  function releaseCrop(){cropImage?.close();cropImage=null;drag=null;editor.hidden=true}
  function drawCrop(){if(!cropImage)return;const scale=320/Math.min(cropImage.width,cropImage.height)*zoom;
   cropX=Math.max(320-cropImage.width*scale,Math.min(0,cropX));cropY=Math.max(320-cropImage.height*scale,Math.min(0,cropY));
   ctx.fillStyle='#fff';ctx.fillRect(0,0,320,320);ctx.drawImage(cropImage,cropX,cropY,cropImage.width*scale,cropImage.height*scale);
  }
  async function startCrop(blob){
-  const ticket=++request;processing=true;$('#savechild').disabled=true;
+  const ticket=++request;processing=true;saveButton.disabled=true;
   try{
    if(blob.size>15*1024*1024)throw Error('Επιλέξτε φωτογραφία μικρότερη από 15 MB.');
    const image=await createImageBitmap(blob);
@@ -89,7 +89,7 @@ function editChild(id){
    const scale=320/Math.min(image.width,image.height);cropX=(320-image.width*scale)/2;cropY=(320-image.height*scale)/2;
    editor.hidden=false;drawCrop();$('#formerror').textContent='';
   }catch(err){if(ticket===request&&canvas.isConnected)$('#formerror').textContent=err.message||'Η φωτογραφία δεν μπορεί να φορτωθεί.'}
-  finally{if(ticket===request){processing=false;$('#savechild').disabled=false}}
+  finally{if(ticket===request){processing=false;saveButton.disabled=false}}
  }
  function applyCrop(){if(!cropImage)return;photo=canvas.toDataURL('image/jpeg',.8);$('#photopreview').innerHTML=avatar({...c,photo});$('#adjustphoto').hidden=false;releaseCrop()}
  modal.addEventListener('close',()=>{request++;releaseCrop()},{once:true});
@@ -120,7 +120,7 @@ function confirmDeleteChild(c){
  $('#modal').close();
  $('#modal').innerHTML=`<h2>Διαγραφή παιδιού;</h2><p>Θα διαγραφεί το παιδί <strong>${esc(c.name)}</strong> μαζί με το ιστορικό παρουσιών του. Η διαγραφή είναι οριστική.</p><p class="error" id="deleteerror" role="alert"></p><div class="formactions"><button type="button" class="secondary" id="canceldelete">Ακύρωση</button><button type="button" class="danger" id="confirmdelete">Διαγραφή</button></div>`;
  openModal();
- $('#canceldelete').onclick=()=>{$('#modal').close();editChild(c.id)};
+ $('#canceldelete').onclick=()=>{const modal=$('#modal');modal.addEventListener('close',()=>editChild(c.id),{once:true});modal.close()};
  $('#confirmdelete').onclick=async e=>{
   const b=e.currentTarget;b.disabled=true;$('#canceldelete').disabled=true;
   try{
